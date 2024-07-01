@@ -6,6 +6,7 @@ const Student = require('../model/student');   // where the schema of the studen
 const mongoose = require('mongoose');   // included here mainly so that it can be used to generate the automatic id 
 
 
+
 // Flow - We first go to postman and URL 'localhost:3000/student' and go to the POST option. Then in the body we write the data we want to save in the json format. Then we click the 'Send' button, it runs the below 'post' command. It then creates an object of Student type and store the data collected from the postman. Then by 'student.save()' it saves the data in the database 
 
 router.post('/', (req, res, next) => {
@@ -40,6 +41,27 @@ router.post('/', (req, res, next) => {
 
 
 
+// Flow - just do the 'GET' request in Postman and then the corresponding data collection will be displayed as a response 
+
+router.get('/', (req, res, next) =>{
+    Student.find()   // retrieves all documents from student collection
+    
+    .then(result =>{
+        console.log(result);
+        res.status(200).json({
+            studentData : result
+        });
+    })
+
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error : err
+        });
+    })
+})
+
+
 
 
 
@@ -48,15 +70,6 @@ router.post('/', (req, res, next) => {
 // router.post('/', (req, res, next) =>{
 //     console.log(req.body);    // prints the json body like {name : 'Rahul', gender : 'Male'}
 // })
-
-
-
-
-
-
-
-
-
 
 
 
