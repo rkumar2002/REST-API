@@ -12,6 +12,26 @@ router.post('/', (req, res, next) => {
         gender : req.body.gender,
         age : req.body.age
     })
+    
+    // To save in database
+    student.save()
+    // if the save action is performed properly then it will be caught in the 'then' statement otherwise in 'catch' statement. 
+
+    // we store the the outcome in the results attribute and then send it as a response (to Postman) to display the result
+    .then(result => {
+        console.log(result);
+        res.status(200).json({
+            newStudent : result
+        })
+    })
+
+    // otherwise if a error is occured then we catch the error and display it (in console as well as postman)
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error : err
+        })
+    })
 })
 
 
