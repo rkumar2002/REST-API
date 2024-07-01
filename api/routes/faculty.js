@@ -16,6 +16,7 @@ router.post('/', (req, res, next) => {
     });
 
     faculty.save()
+    
     .then(result => {
         console.log(result);
         res.status(200).json({
