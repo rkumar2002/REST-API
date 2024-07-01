@@ -8,7 +8,7 @@ const mongoose = require('mongoose');   // included here mainly so that it can b
 router.post('/', (req, res, next) => {
     const student = new Student({
         _id : new mongoose.Types.ObjectId,  // to automatically assign a new id to the json the data
-        name : req.body.name,    // 'req.body.name' so that the req containing body, which contains 'name' variable.. its data will be stored here in the name variable
+        name : req.body.name,    // 'req.body.name' so that the req containing body, which contains 'name' variable.. its data will be stored here in the name variable 
         gender : req.body.gender,
         age : req.body.age
     })
