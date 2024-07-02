@@ -4,6 +4,7 @@ const router = express.Router();
 const Student = require('../model/student');   // where the schema of the student collection is defined
 
 const mongoose = require('mongoose');   // included here mainly so that it can be used to generate the automatic id 
+const student = require('../model/student');
 
 
 
@@ -60,6 +61,47 @@ router.get('/', (req, res, next) =>{
         });
     })
 })
+
+
+
+
+// GET request for particular ID -
+
+// Flow - To retrieve the document of a particular id then we first design a URL type like '/:id' and then we hit request like localhost:3000/student/6682b7a8dcf37a3a45e27b50 from postman and then using Student.findById() function we find the corresponding object and then display it
+
+
+//  :id means whatever comes after 'localhost:3000/student/...' will be stored in the variable id.
+router.get('/:id', (req, res, next) => {
+    console.log(req.params.id);  // params include the variable parts of the URL, like here id
+
+    const id = req.params.id;
+
+    Student.findById(id)
+    
+    .then(result => {
+        if(result){
+            res.status(200).json(result);
+        }
+        else{
+            res.status(404).json({message : "Student not found"});
+        }
+    })
+
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error : err
+        });
+    });
+
+});
+
+
+
+// router.get('/:id/:x', (req, res, next) => {}
+
+// In this case params will contain 2 objects id and x. Ex - a URL is hit like 'localhost:3000/student/6682b61/hdush' then id variable will contain - 6682b61 and x - hdush. So req.paramms will be - {id: '6682b618dcf37a3a45e2', x: 'hdush'}
+
 
 
 
