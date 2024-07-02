@@ -136,6 +136,64 @@ router.delete('/:id', (req, res, next) => {
 
 
 
+// Diff b/w PUT and PATCH - Both of them update the document present in the collection. But in case of PUT, one has to send all other data items which are not changing as well to save the new data object. But in case of PATCH, we only need to give the changed data and the rest data will stay as it is in the database
+
+
+// PUT -
+
+router.put('/:id', (req, res, next) => {
+    const id = req.params.id;
+
+    // first parameter takes the filter acc to which we find our unique data. In this case it is id.
+    Student.findOneAndUpdate({_id : id},{
+        $set : {
+            name : req.body.name,     
+            gender : req.body.gender,
+            age : req.body.age
+        }
+    }, {new : true})  // so that it returns the updated result
+    
+    .then(result => {
+        res.status(200).json({
+            updated : result
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            error : err
+        })
+    })
+})
+
+
+
+
+// router.put('/:id', (req, res, next) => {
+//     const id = req.params.id;
+//     const updateOps = {};     // another way to collect all the key and value
+
+//     for (const [key, value] of Object.entries(req.body)) {
+//         updateOps[key] = value;
+//     }
+
+//     Student.findOneAndUpdate(
+//         { _id: id },
+//         { $set: updateOps },
+//         { new: true, overwrite: true } // Overwrite the document
+//     )
+//     .then(result => {
+//         res.status(200).json({
+//             updated: result
+//         });
+//     })
+//     .catch(err => {
+//         res.status(500).json({
+//             error: err
+//         });
+//     });
+// });
+
+
 
 
 
