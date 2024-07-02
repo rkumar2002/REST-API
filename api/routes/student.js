@@ -73,7 +73,7 @@ router.get('/', (req, res, next) =>{
 
 //  :id means whatever comes after 'localhost:3000/student/...' will be stored in the variable id.
 router.get('/:id', (req, res, next) => {
-    console.log(req.params.id);  // params include the variable parts of the URL, like here id
+    // console.log(req.params.id);  // params include the variable parts of the URL, like here id
 
     const id = req.params.id;
 

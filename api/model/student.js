@@ -8,7 +8,8 @@ const studentSchema = new mongoose.Schema({
     gender:String,       
     age:Number
 
-    // if we do not provide a key-value pair acc to the schema (like I dont include 'age' -> {"name" : "rahul", "gender" : "Male"}) then it will not throw any error, rather it will create an obj in the document without the 'age'. To ensure that it is mandatory to include certain fields then we have to use 'required' keyword, and if I want a default value which will be inserted in the document in case no such 'key' is given then a default value will be inserted. 
+    // if we do not provide a key-value pair acc to the schema while posting (like I dont include 'age' -> {"name" : "rahul", "gender" : "Male"}) then it will not throw any error, rather it will create an obj in the document without the 'age'. To ensure that it is mandatory to include certain fields then we have to use 'required' keyword, and if I want a default value which will be inserted in the document in case no such 'key' is given then 'default' keyword has to be used. 
+
     // Check faculty model for 'required' and 'default' keyword
 })
 
