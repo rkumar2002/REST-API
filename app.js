@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const studentRoute = require('./api/routes/student')
 const facultyRoute = require('./api/routes/faculty');
+const userRoute = require('./api/routes/user');
 
 const mongoose = require('mongoose');  // npm install mongoose
 
@@ -34,7 +35,7 @@ app.use(express.json());
 // whenever someone hits the '/student' endpoint, studentRoute will be activated where the logic for GET, POST etc is written
 app.use('/student', studentRoute);
 app.use('/faculty', facultyRoute);
-
+app.use('/user', userRoute);
 
 
 // If I try to hit a URL like '/staff' which is not even declared here then an error HTML will be shown (in Postman) if the below code (where it responses with app is running) is not present.

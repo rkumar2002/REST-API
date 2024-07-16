@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router(); 
+const mongoose = require('mongoose');   // included here mainly so that it can be used to generate the automatic id 
 
 const Student = require('../model/student');   // where the schema of the student collection is defined
 
-const mongoose = require('mongoose');   // included here mainly so that it can be used to generate the automatic id 
 const student = require('../model/student');
 
 
