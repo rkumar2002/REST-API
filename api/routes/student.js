@@ -6,7 +6,7 @@ const Student = require('../model/student');   // where the schema of the studen
 
 const student = require('../model/student');
 
-
+const checkAuth = require('../middleware/check-auth');
 
 // Flow - We first go to postman and URL 'localhost:3000/student' and go to the POST option. Then in the body we write the data we want to save in the json format. Then we click the 'Send' button, it runs the below 'post' command. It then creates an object of Student type and store the data collected from the postman. Then by 'student.save()' it saves the data in the database 
 
@@ -45,23 +45,25 @@ router.post('/', (req, res, next) => {
 
 // Flow - just do the 'GET' request in Postman and then the corresponding data collection will be displayed as a response 
 
-router.get('/', (req, res, next) =>{
-    Student.find()   // retrieves all documents from student collection
-    
-    .then(result =>{
-        console.log(result);
-        res.status(200).json({
-            studentData : result
-        });
-    })
+// For JWT protection code of get req, check after line 170
 
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({
-            error : err
-        });
-    })
-})
+// router.get('/', (req, res, next) =>{
+//     Student.find()   // retrieves all documents from student collection
+    
+//     .then(result =>{
+//         console.log(result);
+//         res.status(200).json({
+//             studentData : result
+//         });
+//     })
+
+//     .catch(err =>{
+//         console.log(err);
+//         res.status(500).json({
+//             error : err
+//         });
+//     })
+// })
 
 
 
@@ -164,6 +166,28 @@ router.put('/:id', (req, res, next) => {
         })
     })
 })
+
+
+// checkAuth acts as middleware which checks if the user is authenticated to make certain action. Like here, the get request will be performed only if the the user is making this action with the right token.
+router.get('/', checkAuth, (req, res, next) =>{
+    Student.find()   // retrieves all documents from student collection
+    
+    .then(result =>{
+        console.log(result);
+        res.status(200).json({
+            studentData : result
+        });
+    })
+
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error : err
+        });
+    })
+})
+
+
 
 
 
