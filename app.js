@@ -10,6 +10,9 @@ const mongoose = require('mongoose');  // npm install mongoose
 // npm install body-parser
 const bodyParser = require('body-parser');  // for making the server understand the data. But we can directly use 'express' for the same purpose as it has built-in tools for the job.
 
+// for storing of images // npm install express-fileupload
+const fileUpload = require('express-fileupload');
+
 
 mongoose.connect('mongodb+srv://rahulkumar:rahul123@rahul.ttczyvf.mongodb.net/?retryWrites=true&w=majority&appName=rahul')
 
@@ -26,10 +29,13 @@ mongoose.connection.on('connected', connected =>{
 // Now if I try to write the wrong password then the server will not start, else it will start and corresponding message will be displayed
 
 
-
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
+
+app.use(fileUpload({
+    useTempFiles : true
+}))
 
 
 // whenever someone hits the '/student' endpoint, studentRoute will be activated where the logic for GET, POST etc is written
