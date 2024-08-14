@@ -28,19 +28,6 @@ router.post('/', (req, res, next) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Flow - We first go to postman and URL 'localhost:3000/student' and go to the POST option. Then in the body we write the data we want to save in the json format. Then we click the 'Send' button, it runs the below 'post' command. It then creates an object of Student type and store the data collected from the postman. Then by 'student.save()' it saves the data in the database 
 
 // router.post('/', (req, res, next) => {
